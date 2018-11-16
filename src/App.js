@@ -5,11 +5,18 @@ import DictionaryList from './components/DictionaryList';
 import Dictionary from './components/Dictionary';
 import NotFound from './components/NotFound';
 
+function generateId() {
+  return Math.random()
+    .toString(36)
+    .substr(-8);
+}
+
 const mockedDictionaries = [
-  { title: 'Furniture dictionary', id: '1' },
-  { title: 'TV Dictionary', id: '2' }
+  { title: 'Furniture dictionary', id: generateId() },
+  { title: 'TV Dictionary', id: generateId() }
 ];
 
+//TODO: Store dictionaries in local storage
 class App extends Component {
   state = {
     dictionaries: [],
@@ -29,6 +36,14 @@ class App extends Component {
   handleDeleteDictionary = id => {
     this.setState(currentState => ({
       dictionaries: currentState.dictionaries.filter(d => d.id !== id)
+    }));
+  };
+
+  handleAddDictionary = title => {
+    //TODO: remove local fake id and call API
+    const id = generateId();
+    this.setState(currentState => ({
+      dictionaries: currentState.dictionaries.concat([{ title, id }])
     }));
   };
 
@@ -52,6 +67,7 @@ class App extends Component {
                   <DictionaryList
                     dictionaries={dictionaries}
                     deleteDictionary={this.handleDeleteDictionary}
+                    addDictionary={this.handleAddDictionary}
                     isLoading={isLoading}
                   />
                 )}

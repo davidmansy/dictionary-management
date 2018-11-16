@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
+import AddDictionary from './AddDictionary';
 import DictionaryListItem from './DictionaryListItem';
 
 class DictionaryList extends Component {
   render() {
-    const { dictionaries, isLoading, deleteDictionary } = this.props;
+    const {
+      dictionaries,
+      isLoading,
+      deleteDictionary,
+      addDictionary
+    } = this.props;
 
     return (
       <div>
+        <AddDictionary addDictionary={addDictionary} />
         {isLoading ? (
           <Loading />
         ) : (
