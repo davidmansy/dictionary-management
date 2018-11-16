@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
+import Loading from './Loading';
+import DictionaryListItem from './DictionaryListItem';
 
 class DictionaryList extends Component {
   render() {
-    const { dictionaries } = this.props;
+    const { dictionaries, isLoading, deleteDictionary } = this.props;
 
     return (
       <div>
-        <div className="main">
+        {isLoading ? (
+          <Loading />
+        ) : (
           <ul>
             {dictionaries.map(dictionary => {
-              return <li key={dictionary.id}>{dictionary.title}</li>;
+              return (
+                <li key={dictionary.id} className="dictionary-list-item">
+                  <DictionaryListItem
+                    dictionary={dictionary}
+                    deleteDictionary={deleteDictionary}
+                  />
+                </li>
+              );
             })}
           </ul>
-        </div>
+        )}
       </div>
     );
   }
