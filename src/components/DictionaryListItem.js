@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { deleteDictionary } from '../actions/dictionaries';
 import { withRouter } from 'react-router-dom';
 
 class DictionaryListItem extends Component {
@@ -8,8 +10,14 @@ class DictionaryListItem extends Component {
     history.push(`/dictionaries/${dictionary.id}`);
   };
 
+  handleDeleteDictionary = e => {
+    e.preventDefault();
+    const { dictionary, dispatch } = this.props;
+    dispatch(deleteDictionary(dictionary.id));
+  };
+
   render() {
-    const { dictionary, deleteDictionary } = this.props;
+    const { dictionary } = this.props;
 
     return (
       <Fragment>
@@ -22,10 +30,7 @@ class DictionaryListItem extends Component {
           </button>
           <button
             className="button__list"
-            onClick={e => {
-              e.preventDefault();
-              deleteDictionary(dictionary.id);
-            }}
+            onClick={this.handleDeleteDictionary}
           >
             Delete
           </button>
@@ -35,4 +40,11 @@ class DictionaryListItem extends Component {
   }
 }
 
-export default withRouter(DictionaryListItem);
+function mapStateToProps({ dictionaries }, { id }) {
+  const dictionary = dictionaries.find(d => d.id === id);
+  return {
+    dictionary
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(DictionaryListItem));

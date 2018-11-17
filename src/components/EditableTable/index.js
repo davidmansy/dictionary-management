@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateDictionary } from '../../actions/dictionaries';
 import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
 
 const FormItem = Form.Item;
@@ -62,9 +64,7 @@ class EditableCell extends React.Component {
 class EditableTable extends React.Component {
   constructor(props) {
     super(props);
-    // TODO: REMOVE
-    console.log('props', props);
-    this.state = { data: props.dictionary.data, editingKey: '' };
+    this.state = { data: this.props.dictionary.data, editingKey: '' };
     this.columns = [
       {
         title: 'Domain',
@@ -130,7 +130,7 @@ class EditableTable extends React.Component {
   }
 
   save(form, key) {
-    const { updateDictionary, dictionary } = this.props;
+    const { dispatch, dictionary } = this.props;
     form.validateFields((error, row) => {
       if (error) {
         return;
@@ -144,12 +144,12 @@ class EditableTable extends React.Component {
           ...row
         });
         this.setState({ data: newData, editingKey: '' }, () => {
-          updateDictionary(dictionary.id, this.state.data);
+          dispatch(updateDictionary(dictionary.id, this.state.data));
         });
       } else {
         newData.push(row);
         this.setState({ data: newData, editingKey: '' }, () => {
-          updateDictionary(dictionary.id, this.state.data);
+          dispatch(updateDictionary(dictionary.id, this.state.data));
         });
       }
     });
@@ -195,4 +195,11 @@ class EditableTable extends React.Component {
   }
 }
 
-export default EditableTable;
+function mapStateToProps({ dictionaries }, { id }) {
+  const dictionary = dictionaries.find(d => d.id === id);
+  return {
+    dictionary
+  };
+}
+
+export default connect(mapStateToProps)(EditableTable);

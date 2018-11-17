@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addDictionary } from '../actions/dictionaries';
 
 class AddDictionary extends Component {
   state = {
@@ -14,7 +16,7 @@ class AddDictionary extends Component {
 
   handleSubmitAddDictionary = e => {
     e.preventDefault();
-    this.props.addDictionary(this.state.title);
+    this.props.dispatch(addDictionary(this.state.title));
     this.setState(currentState => ({
       title: ''
     }));
@@ -41,4 +43,4 @@ class AddDictionary extends Component {
   }
 }
 
-export default AddDictionary;
+export default connect()(AddDictionary);

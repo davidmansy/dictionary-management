@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AddDictionary from './AddDictionary';
 import DictionaryListItem from './DictionaryListItem';
 
 class DictionaryList extends Component {
   render() {
-    const { dictionaries, deleteDictionary, addDictionary } = this.props;
+    const { dictionaryIds } = this.props;
 
     return (
       <div>
-        <AddDictionary addDictionary={addDictionary} />
+        <AddDictionary addDictionary />
         <ul>
-          {dictionaries.map(dictionary => {
+          {dictionaryIds.map(id => {
             return (
-              <li key={dictionary.id} className="dictionary-list-item">
-                <DictionaryListItem
-                  dictionary={dictionary}
-                  deleteDictionary={deleteDictionary}
-                />
+              <li key={id} className="dictionary-list-item">
+                <DictionaryListItem id={id} />
               </li>
             );
           })}
@@ -26,4 +24,10 @@ class DictionaryList extends Component {
   }
 }
 
-export default DictionaryList;
+function mapStatesToProps({ dictionaries }) {
+  return {
+    dictionaryIds: dictionaries.map(d => d.id)
+  };
+}
+
+export default connect(mapStatesToProps)(DictionaryList);
