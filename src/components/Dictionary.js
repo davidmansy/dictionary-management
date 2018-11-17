@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import EditableTable from './EditableTable';
 
 class Dictionary extends Component {
@@ -9,7 +9,9 @@ class Dictionary extends Component {
 
     return (
       <div>
-        {!dictionary ? null : (
+        {!dictionary ? (
+          <Redirect to="/" />
+        ) : (
           <Fragment>
             <Link to={'/'}>Back</Link>
             <h2>{dictionary.title}</h2>

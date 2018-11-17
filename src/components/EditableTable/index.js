@@ -80,7 +80,7 @@ class EditableTable extends React.Component {
       },
       {
         title: 'Issues',
-        dataIndex: 'issues',
+        dataIndex: 'displayIssues',
         width: '30%',
         editable: false
       },

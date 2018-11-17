@@ -3,73 +3,6 @@ export const ADD_DICTIONARY = 'ADD_DICTIONARY';
 export const DELETE_DICTIONARY = 'DELETE_DICTIONARY';
 export const UPDATE_DICTIONARY = 'UPDATE_DICTIONARY';
 
-// TODO: REMOVE
-// const mockedDictionaries = [
-//   {
-//     title: 'Furniture dictionary',
-//     id: generateId(),
-//     status: 'inconsistent', //at least one warning
-//     data: [
-//       {
-//         key: generateId(),
-//         domain: 'Stonegrey',
-//         range: 'Dark Grey',
-//         issues: []
-//       },
-//       {
-//         key: generateId(),
-//         domain: 'Caribbean Sea',
-//         range: 'Turqoise',
-//         issues: [{ type: 'Duplicate Domains/Ranges', severity: 'warning' }]
-//       },
-//       {
-//         key: generateId(),
-//         domain: 'Caribbean Sea',
-//         range: 'Turqoise',
-//         issues: [{ type: 'Duplicate Domains/Ranges', severity: 'warning' }]
-//       }
-//     ]
-//   },
-//   {
-//     title: 'TV Dictionary',
-//     id: generateId(),
-//     status: 'valid', //no errors, no warnings
-//     data: [
-//       {
-//         key: generateId(),
-//         domain: 'Caribbean Sea',
-//         range: 'Turqoise',
-//         issues: []
-//       },
-//       {
-//         key: generateId(),
-//         domain: 'Midnight Blue',
-//         range: 'Dark Blue',
-//         issues: []
-//       }
-//     ]
-//   },
-//   {
-//     title: 'Computer Dictionary',
-//     id: generateId(),
-//     status: 'invalid', //Has at least one error
-//     data: [
-//       {
-//         key: generateId(),
-//         domain: 'Stonegrey',
-//         range: 'Dark Grey',
-//         issues: [{ type: 'cycle', severity: 'error' }]
-//       },
-//       {
-//         key: generateId(),
-//         domain: 'Dark Grey',
-//         range: 'Stonegrey',
-//         issues: [{ type: 'cycle', severity: 'error' }]
-//       }
-//     ]
-//   }
-// ];
-
 function generateId() {
   return Math.random()
     .toString(36)
@@ -80,63 +13,58 @@ const mockedDictionaries = [
   {
     title: 'Furniture dictionary',
     id: generateId(),
-    status: 'inconsistent', //at least one warning
     data: [
       {
         key: generateId(),
         domain: 'Stonegrey',
-        range: 'Dark Grey',
-        issues: []
+        range: 'Dark Grey'
       },
       {
         key: generateId(),
         domain: 'Caribbean Sea',
-        range: 'Turqoise',
-        issues: []
+        range: 'Turqoise'
       },
       {
         key: generateId(),
         domain: 'Caribbean Sea',
-        range: 'Turqoise',
-        issues: []
+        range: 'Turqoise'
       }
     ]
   },
   {
     title: 'TV Dictionary',
     id: generateId(),
-    status: 'valid', //no errors, no warnings
     data: [
       {
         key: generateId(),
         domain: 'Caribbean Sea',
-        range: 'Turqoise',
-        issues: []
+        range: 'Turqoise'
       },
       {
         key: generateId(),
         domain: 'Midnight Blue',
-        range: 'Dark Blue',
-        issues: []
+        range: 'Dark Blue'
       }
     ]
   },
   {
     title: 'Computer Dictionary',
     id: generateId(),
-    status: 'invalid', //Has at least one error
     data: [
       {
         key: generateId(),
         domain: 'Stoneyellow',
-        range: 'Dark Yellow',
-        issues: []
+        range: 'Dark Yellow'
+      },
+      {
+        key: generateId(),
+        domain: 'Stoneyellow',
+        range: 'Dark Yellow'
       },
       {
         key: generateId(),
         domain: 'Dark Yellow',
-        range: 'Stoneyellow',
-        issues: []
+        range: 'Stoneyellow'
       }
     ]
   }
