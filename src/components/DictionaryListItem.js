@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 class DictionaryListItem extends Component {
-  editDictionary = e => {
+  goToDetail = e => {
     const { history, dictionary } = this.props;
     e.preventDefault();
     history.push(`/dictionaries/${dictionary.id}`);
@@ -17,8 +17,8 @@ class DictionaryListItem extends Component {
           <span>{dictionary.title}</span>
         </div>
         <div>
-          <button className="button__list" onClick={this.editDictionary}>
-            Edit
+          <button className="button__list" onClick={this.goToDetail}>
+            Detail
           </button>
           <button
             className="button__list"

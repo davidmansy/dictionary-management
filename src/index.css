@@ -1,3 +1,23 @@
+@import '~antd/dist/antd.css';
+
+/* ant design */
+
+.editable-row .ant-form-explain {
+  position: absolute;
+  font-size: 12px;
+  margin-top: -4px;
+}
+
+.ant-btn-primary {
+  background-color: #56e0ae;
+  border-color: #56e0ae;
+}
+
+/* app */
+* {
+  box-sizing: border-box;
+}
+
 body {
   color: #252525;
   font-family: sans-serif;
@@ -28,10 +48,6 @@ option {
   -moz-appearance: none; /* Gecko */
 }
 
-* {
-  box-sizing: border-box;
-}
-
 input {
   border-style: solid;
   border-radius: 5px;
@@ -44,15 +60,14 @@ input::placeholder {
 
 .container {
   margin: 0 auto;
-  max-width: 550px;
-  padding: 10px;
+  padding: 5px 20px;
 }
 
 .header {
   border-bottom: 3px solid #56e0ae;
   color: #59707b;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0 auto 20px auto;
   padding: 0 20% 0 20%;
 }
