@@ -9,7 +9,6 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-//TODO: Remove mapStateToProps dictionary
 class AddDictionaryForm extends Component {
   componentDidMount() {
     // To disable submit button at the beginning.
@@ -71,10 +70,4 @@ class AddDictionaryForm extends Component {
   }
 }
 
-function mapStateToProps({ dictionaries }) {
-  return {
-    dictionaries
-  };
-}
-
-export default connect(mapStateToProps)(Form.create()(AddDictionaryForm));
+export default connect()(Form.create()(AddDictionaryForm));

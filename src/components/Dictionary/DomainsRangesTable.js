@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { updateDomainRange } from '../../actions/dictionaries';
-import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
+import { Table, Input, InputNumber, Popconfirm, Form, Tag } from 'antd';
 
 /*
   Display table from ant.design
@@ -88,9 +88,27 @@ class DomainsRangesTable extends Component {
       },
       {
         title: 'Issues',
-        dataIndex: 'displayIssues',
+        dataIndex: 'issues',
         width: '30%',
-        editable: false
+        editable: false,
+        render: (text, record) => {
+          return (
+            <span>
+              {record.issues.size === 0 ? null : (
+                <Fragment>
+                  {[...record.issues].map(issue => (
+                    <Tag
+                      color={issue.severity === 'warning' ? 'orange' : 'red'}
+                      key={issue.type}
+                    >
+                      {issue.type}
+                    </Tag>
+                  ))}
+                </Fragment>
+              )}
+            </span>
+          );
+        }
       },
       {
         title: 'operation',

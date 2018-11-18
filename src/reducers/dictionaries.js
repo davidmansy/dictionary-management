@@ -23,8 +23,7 @@ export default function dictionaries(state = [], action) {
         {
           title: action.title,
           key: generateId(),
-          data: [],
-          issues: new Set()
+          data: []
         }
       ]);
     case DELETE_DICTIONARY:

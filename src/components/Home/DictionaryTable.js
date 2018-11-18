@@ -132,7 +132,7 @@ class DictionaryTable extends Component {
         title: 'Action',
         dataIndex: 'action',
         render: (text, record) => {
-          return dictionaries.length >= 1 ? (
+          return dictionaries.length >= 0 ? (
             <span>
               <a
                 href="javascript:;"

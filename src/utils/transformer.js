@@ -12,18 +12,23 @@ const FORKS = {
 const CHAINS = { type: 'Chains', severity: ISSUE_SEVERITY_WARNING };
 const CYCLE = { type: 'Cycle', severity: ISSUE_SEVERITY_ERROR };
 
+/*
+  Using brute force here and getting quadratic time.
+  TODO: Using a custom hashtable could avoid this quadratic time/complexity when
+  looking e.g. for a dup where we should get constant time.
+  Howver when looking for a cycle, in order to have a constant time, we would
+  need another hashtable where the key is the range and not the domain.
+ */
+
 export const transformer = sourceData => {
   const data = [...sourceData];
-  //Reset issues - linear complexity
-  //TODO: when add is working, replace by clearing the set instead of a new one
-  data.forEach(d => d.issues.clear());
+  data.forEach(d => (d.issues = new Set())); //reset issues - linear time/comp
 
-  //TODO: Using a hashtable would avoid this quadratic time/complexity
   for (let i = 0, l = data.length; i < l; i++) {
     const item1 = data[i];
     for (let j = i + 1; j < l; j++) {
       const item2 = data[j];
-      //TODO: here a hashtable would mean access in constant time
+      //TODO: here a hashtable would mean access in constant time.
       if (item1.domain === item2.domain) {
         if (item1.range === item2.range) {
           item1.issues.add(DUPS_DOMAINS_RANGES);
@@ -35,7 +40,7 @@ export const transformer = sourceData => {
       }
       //TODO: If we want constant time here, we would need to create a second
       //data structure where the key would be the range and update this
-      //data structure each time the hastable is updated,
+      //data structure each time the hastable is updated.
       if (item1.range === item2.domain) {
         if (item2.range === item1.domain) {
           item1.issues.add(CYCLE);
@@ -45,15 +50,6 @@ export const transformer = sourceData => {
           item2.issues.add(CHAINS);
         }
       }
-    }
-
-    //TODO: create another middleware for this but then another linear parsing...
-    if (item1.issues) {
-      item1.displayIssues = [...item1.issues].reduce((acc, issue) => {
-        return issue.severity === 'warning'
-          ? acc + `${issue.type} (W) `
-          : acc + `${issue.type} (E) `;
-      }, '');
     }
   }
 
