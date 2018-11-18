@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateDictionary } from '../../actions/dictionaries';
+import { updateDomainRange } from '../../actions/dictionaries';
 import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
+
+/*
+  Display table from ant.design
+  https://ant.design/components/table/#components-table-demo-edit-cell
+  I mix the two tables 'Editable Cells' and 'Editable Rows' from the demo
+  and use the redux store for the dataSource instead of the state
+*/
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -14,7 +21,7 @@ const EditableRow = ({ form, index, ...props }) => (
 
 const EditableFormRow = Form.create()(EditableRow);
 
-class EditableCell extends React.Component {
+class EditableCell extends Component {
   getInput = () => {
     if (this.props.inputType === 'number') {
       return <InputNumber />;
@@ -61,10 +68,11 @@ class EditableCell extends React.Component {
   }
 }
 
-class EditableTable extends React.Component {
+class DomainsRangesTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: this.props.dictionary.data, editingKey: '' };
+    const { data } = this.props.dictionary;
+    this.state = { editingKey: '' };
     this.columns = [
       {
         title: 'Domain',
@@ -112,7 +120,22 @@ class EditableTable extends React.Component {
                   </Popconfirm>
                 </span>
               ) : (
-                <a onClick={() => this.edit(record.key)}>Edit</a>
+                <span>
+                  <a
+                    onClick={() => this.edit(record.key)}
+                    className="edit-link"
+                  >
+                    Edit
+                  </a>
+                  {data.length >= 1 ? (
+                    <Popconfirm
+                      title="Sure to delete?"
+                      onConfirm={() => this.handleDelete(record.key)}
+                    >
+                      <a href="javascript:;">Delete</a>
+                    </Popconfirm>
+                  ) : null}
+                </span>
               )}
             </div>
           );
@@ -120,6 +143,12 @@ class EditableTable extends React.Component {
       }
     ];
   }
+
+  handleDelete = key => {
+    const { dispatch, dictionary } = this.props;
+    const data = dictionary.data.filter(item => item.key !== key);
+    dispatch(updateDomainRange(dictionary.id, data));
+  };
 
   isEditing = record => {
     return record.key === this.state.editingKey;
@@ -135,7 +164,7 @@ class EditableTable extends React.Component {
       if (error) {
         return;
       }
-      const newData = [...this.state.data];
+      const newData = [...dictionary.data];
       const index = newData.findIndex(item => key === item.key);
       if (index > -1) {
         const item = newData[index];
@@ -143,15 +172,11 @@ class EditableTable extends React.Component {
           ...item,
           ...row
         });
-        this.setState({ data: newData, editingKey: '' }, () => {
-          dispatch(updateDictionary(dictionary.id, this.state.data));
-        });
       } else {
         newData.push(row);
-        this.setState({ data: newData, editingKey: '' }, () => {
-          dispatch(updateDictionary(dictionary.id, this.state.data));
-        });
       }
+      this.setState({ editingKey: '' });
+      dispatch(updateDomainRange(dictionary.id, newData));
     });
   }
 
@@ -160,6 +185,7 @@ class EditableTable extends React.Component {
   };
 
   render() {
+    const { data } = this.props.dictionary;
     const components = {
       body: {
         row: EditableFormRow,
@@ -184,13 +210,15 @@ class EditableTable extends React.Component {
     });
 
     return (
-      <Table
-        components={components}
-        bordered
-        dataSource={this.state.data}
-        columns={columns}
-        rowClassName="editable-row"
-      />
+      <div>
+        <Table
+          components={components}
+          bordered
+          dataSource={data}
+          columns={columns}
+          rowClassName="editable-row"
+        />
+      </div>
     );
   }
 }
@@ -202,4 +230,4 @@ function mapStateToProps({ dictionaries }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(EditableTable);
+export default connect(mapStateToProps)(DomainsRangesTable);

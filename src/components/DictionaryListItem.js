@@ -25,11 +25,11 @@ class DictionaryListItem extends Component {
           <span>{dictionary.title}</span>
         </div>
         <div>
-          <button className="button__list" onClick={this.goToDetail}>
+          <button className="dictionary-button" onClick={this.goToDetail}>
             Detail
           </button>
           <button
-            className="button__list"
+            className="dictionary-button"
             onClick={this.handleDeleteDictionary}
           >
             Delete

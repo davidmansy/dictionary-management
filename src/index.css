@@ -1,6 +1,6 @@
 @import '~antd/dist/antd.css';
 
-/* ant design */
+/* ant design, TODO: should be customized using webpack */
 
 .editable-row .ant-form-explain {
   position: absolute;
@@ -13,7 +13,12 @@
   border-color: #56e0ae;
 }
 
+.edit-link {
+  margin-right: 5px;
+}
+
 /* app */
+
 * {
   box-sizing: border-box;
 }
@@ -42,12 +47,6 @@ p {
   margin: 0;
 }
 
-select,
-option {
-  -webkit-appearance: none; /* WebKit/Chromium */
-  -moz-appearance: none; /* Gecko */
-}
-
 input {
   border-style: solid;
   border-radius: 5px;
@@ -72,7 +71,9 @@ input::placeholder {
   padding: 0 20% 0 20%;
 }
 
-.button__list {
+/* Dictionaties */
+
+.dictionary-button {
   background-color: #56e0ae;
   border-color: #56e0ae;
   border-radius: 5px;
@@ -85,53 +86,9 @@ input::placeholder {
   margin: 0 5px;
 }
 
-.button__list:hover {
+.dictionary-button:hover {
   background-color: #4bc197;
   border-color: #4bc197;
-}
-
-/* TODO: TO REMOVE? */
-.button__submit {
-  background-color: #56e0ae;
-  border-color: #56e0ae;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: inherit;
-  font-weight: 700;
-  height: 40px;
-  padding: 5px;
-  width: 100%;
-}
-
-.button__submit:hover {
-  background-color: #4bc197;
-  border-color: #4bc197;
-}
-
-.button__submit--disabled {
-  background-color: white;
-  border-color: lightgrey;
-  color: lightgrey;
-  cursor: not-allowed;
-}
-
-.button__submit--disabled:hover {
-  background-color: white;
-  border-color: lightgrey;
-}
-/* ************ */
-
-.spinner-container {
-  align-items: center;
-  display: flex;
-  height: 600px;
-  justify-content: center;
-  width: 100%;
-}
-
-.spinner {
-  width: 50px;
 }
 
 .dictionary-list-item {
@@ -141,18 +98,24 @@ input::placeholder {
   margin-bottom: 10px;
 }
 
-.addDictionary__form {
+.add-dictionary-form {
   display: flex;
   align-items: stretch;
   text-align: center;
   justify-content: flex-start;
 }
 
-.addDictionary__inputText {
+.add-dictionary-input-text {
   background-color: white;
   border-color: lightgrey;
   font-size: inherit;
   height: 40px;
   margin-bottom: 10px;
   padding: 5px;
+}
+
+/* Domains Ranges */
+
+.add-domain-range-container {
+  height: 110px;
 }

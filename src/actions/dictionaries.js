@@ -1,7 +1,8 @@
 export const RECEIVE_DICTIONARIES = 'RECEIVE_DICTIONARIES';
 export const ADD_DICTIONARY = 'ADD_DICTIONARY';
 export const DELETE_DICTIONARY = 'DELETE_DICTIONARY';
-export const UPDATE_DICTIONARY = 'UPDATE_DICTIONARY';
+export const UPDATE_DOMAIN_RANGE = 'UPDATE_DOMAIN_RANGE';
+export const ADD_DOMAIN_RANGE = 'ADD_DOMAIN_RANGE';
 
 function generateId() {
   return Math.random()
@@ -93,10 +94,19 @@ export function deleteDictionary(id) {
   };
 }
 
-export function updateDictionary(id, data) {
+export function updateDomainRange(id, data) {
   return {
-    type: UPDATE_DICTIONARY,
+    type: UPDATE_DOMAIN_RANGE,
     id,
     data
+  };
+}
+
+export function addDomainRange({ id, domain, range }) {
+  return {
+    type: ADD_DOMAIN_RANGE,
+    id,
+    domain,
+    range
   };
 }

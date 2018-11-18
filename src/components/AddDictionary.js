@@ -26,16 +26,16 @@ class AddDictionary extends Component {
     return (
       <form
         onSubmit={this.handleSubmitAddDictionary}
-        className="addDictionary__form"
+        className="add-dictionary-form"
       >
         <input
           type="text"
-          className="addDictionary__inputText"
+          className="add-dictionary-input-text"
           placeholder={'Add a dictionary'}
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button className="button__list" type="submit">
+        <button className="dictionary-button" type="submit">
           Add
         </button>
       </form>
