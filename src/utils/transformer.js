@@ -12,11 +12,11 @@ const FORKS = {
 const CHAINS = { type: 'Chains', severity: ISSUE_SEVERITY_WARNING };
 const CYCLE = { type: 'Cycle', severity: ISSUE_SEVERITY_ERROR };
 
-const transformer = sourceData => {
+export const transformer = sourceData => {
   const data = [...sourceData];
   //Reset issues - linear complexity
   //TODO: when add is working, replace by clearing the set instead of a new one
-  data.forEach(d => (d.issues = new Set()));
+  data.forEach(d => d.issues.clear());
 
   //TODO: Using a hashtable would avoid this quadratic time/complexity
   for (let i = 0, l = data.length; i < l; i++) {
@@ -59,5 +59,3 @@ const transformer = sourceData => {
 
   return data;
 };
-
-export default transformer;

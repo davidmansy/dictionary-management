@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
-import DictionaryList from './components/DictionaryList';
+import Home from './components/Home';
 import Dictionary from './components/Dictionary';
 import NotFound from './components/NotFound';
-import { connect } from 'react-redux';
 import { receiveDictionaries } from './actions/dictionaries';
 
 class App extends Component {
@@ -22,8 +22,8 @@ class App extends Component {
           <div className="container">
             {!dictionaries ? null : (
               <Switch>
-                <Route path="/" exact component={DictionaryList} />
-                <Route path="/dictionaries/:id" exact component={Dictionary} />
+                <Route path="/" exact component={Home} />
+                <Route path="/dictionaries/:key" exact component={Dictionary} />
                 <Route component={NotFound} />
               </Switch>
             )}

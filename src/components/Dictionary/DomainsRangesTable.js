@@ -147,7 +147,7 @@ class DomainsRangesTable extends Component {
   handleDelete = key => {
     const { dispatch, dictionary } = this.props;
     const data = dictionary.data.filter(item => item.key !== key);
-    dispatch(updateDomainRange(dictionary.id, data));
+    dispatch(updateDomainRange(dictionary.key, data));
   };
 
   isEditing = record => {
@@ -176,7 +176,7 @@ class DomainsRangesTable extends Component {
         newData.push(row);
       }
       this.setState({ editingKey: '' });
-      dispatch(updateDomainRange(dictionary.id, newData));
+      dispatch(updateDomainRange(dictionary.key, newData));
     });
   }
 
@@ -224,7 +224,7 @@ class DomainsRangesTable extends Component {
 }
 
 function mapStateToProps({ dictionaries }, { id }) {
-  const dictionary = dictionaries.find(d => d.id === id);
+  const dictionary = dictionaries.find(d => d.key === id);
   return {
     dictionary
   };

@@ -13,6 +13,12 @@
   border-color: #56e0ae;
 }
 
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #4bc197;
+  border-color: #4bc197;
+}
+
 .edit-link {
   margin-right: 5px;
 }
@@ -71,51 +77,6 @@ input::placeholder {
   padding: 0 20% 0 20%;
 }
 
-/* Dictionaties */
-
-.dictionary-button {
-  background-color: #56e0ae;
-  border-color: #56e0ae;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-size: inherit;
-  font-weight: 700;
-  height: 40px;
-  padding: 5px;
-  margin: 0 5px;
-}
-
-.dictionary-button:hover {
-  background-color: #4bc197;
-  border-color: #4bc197;
-}
-
-.dictionary-list-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.add-dictionary-form {
-  display: flex;
-  align-items: stretch;
-  text-align: center;
-  justify-content: flex-start;
-}
-
-.add-dictionary-input-text {
-  background-color: white;
-  border-color: lightgrey;
-  font-size: inherit;
-  height: 40px;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-/* Domains Ranges */
-
-.add-domain-range-container {
+.add-form-container {
   height: 110px;
 }

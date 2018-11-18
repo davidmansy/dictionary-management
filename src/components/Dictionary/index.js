@@ -17,15 +17,13 @@ class Dictionary extends Component {
           <Fragment>
             <Link to={'/'}>Back</Link>
             <h2>{dictionary.title}</h2>
-            <div className="add-domain-range-container">
+            <div className="add-form-container">
               <Divider orientation="left">Add a new domain/range</Divider>
-              <AddDomainRange id={dictionary.id} />
+              <AddDomainRange id={dictionary.key} />
             </div>
             <div>
-              <Divider orientation="left">
-                List of existing domains/ranges
-              </Divider>
-              <DomainsRangesTable id={dictionary.id} />
+              <Divider orientation="left">Domains/ranges</Divider>
+              <DomainsRangesTable id={dictionary.key} />
             </div>
           </Fragment>
         )}
@@ -35,7 +33,7 @@ class Dictionary extends Component {
 }
 
 function mapStateToProps({ dictionaries }, { match }) {
-  const dictionary = dictionaries.find(d => d.id === match.params.id);
+  const dictionary = dictionaries.find(d => d.key === match.params.key);
   return {
     dictionary
   };

@@ -23,7 +23,7 @@ class AddDomainRangeForm extends Component {
         console.log('Received values of form: ', values);
         dispatch(
           addDomainRange({
-            id: dictionary.id,
+            key: dictionary.key,
             domain: values.domain,
             range: values.range
           })
@@ -88,7 +88,7 @@ class AddDomainRangeForm extends Component {
 }
 
 function mapStateToProps({ dictionaries }, { id }) {
-  const dictionary = dictionaries.find(d => d.id === id);
+  const dictionary = dictionaries.find(d => d.key === id);
   return {
     dictionary
   };
